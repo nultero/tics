@@ -6,16 +6,6 @@ type Arg struct {
 	Function func()
 }
 
-func (a Arg) HasFlag(r rune) bool {
-	for _, f := range a.Flags {
-		if f == r {
-			return true
-		}
-	}
-
-	return false
-}
-
 func BuildCmds(args []string) []*Arg {
 
 	argSlice := []*Arg{}
@@ -29,6 +19,9 @@ func BuildCmds(args []string) []*Arg {
 }
 
 func NewArg(cmdName string, flags ...interface{}) Arg {
+
+	// not finished, need a poll / some func for
+	// different types of flags
 
 	setFlags := []rune{}
 	if len(flags) != 0 {
@@ -48,5 +41,5 @@ func NewArg(cmdName string, flags ...interface{}) Arg {
 }
 
 func (a *Arg) AssignFunction(f func()) {
-	*&a.Function = f
+	a.Function = f
 }

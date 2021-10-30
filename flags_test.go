@@ -1,39 +1,33 @@
 package termeneutics
 
 import (
-	"fmt"
 	"testing"
 )
 
-var a Arg = NewArg("plopCmd", []rune{'a', 'b', 'c'})
+var c Cmd = Cmd{
+	Name: "plop",
+}
 
-func TestNewArgsFlagsInterface(t *testing.T) {
-
+func TestAddFlags(t *testing.T) {
 	testFlags := []rune{'a', 'b', 'c'}
-	for i := range a.Flags {
-		if a.Flags[i] != testFlags[i] {
-			s := fmt.Sprintf("TestNewArgsFlagsInterface failed to load flag %v at index %v", testFlags[i], i)
-			t.Errorf(Emph(s))
+	c.AddFlags(testFlags)
+	for i := range c.Flags {
+		if c.Flags[i] != testFlags[i] {
+			t.Errorf("TestAddFlags failed to load flag %v at index %v", testFlags[i], i)
 		}
 	}
 }
 
 func TestHasFlagFunc(t *testing.T) {
 	testFlag := 'b'
-
-	if !a.HasFlag(testFlag) {
-		s := fmt.Sprintf("TestHasFlagFunc failed to load, want flag '%v'", string(testFlag))
-		t.Errorf(Emph(s))
+	if !c.HasFlag(testFlag) {
+		t.Errorf("TestHasFlagFunc failed to load, want flag '%v'", string(testFlag))
 	}
 }
 
 func TestNumFlags(t *testing.T) {
-	var a Arg = NewArg("plopCmd", []rune{'a', 'b', 'c'})
-	i := len(a.Flags)
-
+	i := len(c.Flags)
 	if i != 3 {
-		s := fmt.Sprintf("TestNumFlags func has '%v' number of flags, want 3", i)
-		msg := Emph(s)
-		t.Errorf(msg)
+		t.Errorf("TestNumFlags func has '%v' number of flags, want 3", i)
 	}
 }

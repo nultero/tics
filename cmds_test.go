@@ -15,3 +15,11 @@ func TestAddDesc(t *testing.T) {
 		t.Errorf("TestAddDesc fails with desc: %v, want %v", k.DescStr, s)
 	}
 }
+
+func TestSetNumArgs(t *testing.T) {
+	n := 2
+	k.SetNumPossArgs(n)
+	if k.NumPossArgs != n {
+		t.Errorf("TestSetNumArgs fails with num: %v, want %v", k.NumPossArgs, n)
+	}
+}

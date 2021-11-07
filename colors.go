@@ -1,4 +1,4 @@
-package termeneutics
+package tics
 
 import "fmt"
 

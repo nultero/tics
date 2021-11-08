@@ -12,8 +12,8 @@ const perm = 0755
 func MakeConfigPrompt(path, lib, defaults string) {
 	fmt.Printf("> config file `%v` not found\n", path)
 	PrintPrompt("config", lib)
-	inp := GetInput()
 
+	inp := GetInput()
 	for !IsValidInput(inp) {
 		PrintInvalid(inp)
 		PrintPrompt("config", lib)
@@ -33,11 +33,27 @@ func MakeConfigPrompt(path, lib, defaults string) {
 	}
 }
 
-func MakeDirPrompt(dirPath, lib string) error {
-	fmt.Printf("> config file `%v` not found\n", dirPath)
-	fmt.Printf("create this config with %v defaults? [ y / N ] >", Blue(lib))
+func MakeDirPrompt(dirPath, lib string) {
+	fmt.Printf("\n> directory path `%v` not found\n", dirPath)
+	PrintPrompt("dir", lib)
 
-	return nil
+	inp := GetInput()
+	for !IsValidInput(inp) {
+		fmt.Printf("> directory path `%v` not found\n", dirPath)
+		PrintPrompt("dir", lib)
+		inp = GetInput()
+	}
+
+	if inp == "y" {
+		err := os.Mkdir(dirPath, perm)
+		if err != nil {
+			ThrowSys(err)
+		}
+		fmt.Printf("dir created: `%v`\n", dirPath)
+
+	} else {
+		fmt.Printf("dir not created; `%v` lib may have a way to rerun this func\n", lib)
+	}
 }
 
 func PrintPrompt(kind, lib string) {

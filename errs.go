@@ -25,6 +25,11 @@ func ThrowSys(err error) {
 	quit(s)
 }
 
+func ThrowTooManyArgs(cmd string) {
+	s := fmt.Sprintf("%s too many args for '%s' cmd", redError(), cmd)
+	quit(s)
+}
+
 func redError() string {
 	return "\033[31;1;4merror:\033[0m"
 }

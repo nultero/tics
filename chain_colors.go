@@ -2,6 +2,7 @@ package tics
 
 import (
 	"fmt"
+	"strings"
 )
 
 type tic struct {
@@ -26,18 +27,33 @@ func MakeT(s string) *tic {
 	return &tic{content: s}
 }
 
-// Transforms *t to a blue ASCII.
+// Transforms *t into a blue ASCII.
 func (t *tic) Blue() *tic {
-	t.content = fmt.Sprintf("\x1b[32;1;4m%v\x1b[0m", t.content)
+	t.content = fmt.Sprintf("\x1b[32;1;1m%v\x1b[0m", t.content)
 	return t
 }
 
-// Returns bolded ASCII
+// Transforms *t into a bolded ASCII
 func (t *tic) Bold() *tic {
 	t.content = fmt.Sprintf("\x1b[;1;1m%v\x1b[0m", t.content)
 	return t
 }
 
+// Unwraps *t into a str.
 func (t *tic) Str() string {
 	return t.content
+}
+
+// Repeats *t's value a set number of times. Note
+// that this should be called after all other *t
+// transforms or else values can print incorrectly.
+func (t *tic) Repeat(count int) *tic {
+	t.content = strings.Repeat(t.content, count)
+	return t
+}
+
+// Transforms *t's value to underline.
+func (t *tic) Underline() *tic {
+	t.content = fmt.Sprintf("\x1b[;1;4m%v\x1b[0m", t.content)
+	return t
 }

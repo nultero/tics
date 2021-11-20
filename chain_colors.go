@@ -29,7 +29,13 @@ func MakeT(s string) *tic {
 
 // Transforms *t into a blue ASCII.
 func (t *tic) Blue() *tic {
-	t.content = fmt.Sprintf("\x1b[32;1;1m%v\x1b[0m", t.content)
+	t.content = fmt.Sprintf("\x1b[34;1;1m%v\x1b[0m", t.content)
+	return t
+}
+
+// Transforms *t into a red ASCII.
+func (t *tic) Red() *tic {
+	t.content = fmt.Sprintf("\x1b[31;1;1m%v\x1b[0m", t.content)
 	return t
 }
 

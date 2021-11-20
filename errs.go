@@ -3,9 +3,15 @@ package tics
 import (
 	"fmt"
 	"os"
+	"reflect"
+	"runtime"
 )
 
-func quit(s string) {
+func BlameFunc(f interface{}) string {
+	return runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
+}
+
+func quit(s interface{}) {
 	fmt.Println(s)
 	os.Exit(1)
 }
@@ -13,6 +19,11 @@ func quit(s string) {
 func Throw(err string) {
 	s := fmt.Sprintf("%s %s", redError(), err)
 	quit(s)
+}
+
+func ThrowUnhandled(err error) {
+	s := fmt.Sprintf("%s %s", redError(), err)
+	fmt.Println(s)
 }
 
 func ThrowX(err error, desc string) {
@@ -25,8 +36,19 @@ func ThrowSys(err error) {
 	quit(s)
 }
 
+func ThrowSysDescriptor(triggerFunc string, err error) {
+	tf := MakeT(triggerFunc).Blue().Str()
+	s := fmt.Sprintf("%s %s has caused -> %s", redError(), tf, err)
+	quit(s)
+}
+
 func ThrowTooManyArgs(cmd string) {
 	s := fmt.Sprintf("%s too many args for '%s' cmd", redError(), cmd)
+	quit(s)
+}
+
+func ThrowTooFewArgs(cmd string) {
+	s := fmt.Sprintf("%s too few args for '%s' cmd", redError(), cmd)
 	quit(s)
 }
 

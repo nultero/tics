@@ -19,7 +19,7 @@ func Pink(s string) string {
 
 // Returns red ASCII
 func Red(s string) string {
-	return fmt.Sprintf("\x1b[31;1;4m%v\x1b[0m", s)
+	return fmt.Sprintf("\x1b[31;1;1m%v\x1b[0m", s)
 }
 
 // Returns bolded ASCII

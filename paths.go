@@ -7,6 +7,7 @@ import (
 
 var dirs = []string{
 	"confDir",
+	"confFile",
 	"dataDir",
 }
 

@@ -83,11 +83,11 @@ func makeConfigPrompt(path, toolName, defaults string) {
 				err = os.WriteFile(path, []byte(defaults), perm)
 
 				if err != nil { // just dump if another error
-					ThrowSysDescriptor(BlameFunc(makeConfigPrompt), err)
+					ThrowSys(makeConfigPrompt, err)
 				}
 
 			} else {
-				ThrowSysDescriptor(BlameFunc(makeConfigPrompt), err)
+				ThrowSys(makeConfigPrompt, err)
 			}
 		}
 
@@ -112,7 +112,7 @@ func makeDirPrompt(dirPath, toolName string) {
 	if inp == "y" {
 		err := os.Mkdir(dirPath, perm)
 		if err != nil {
-			ThrowSysDescriptor(BlameFunc(makeDirPrompt), err)
+			ThrowSys(makeDirPrompt, err)
 		}
 		fmt.Printf("dir created: `%v`\n", dirPath)
 

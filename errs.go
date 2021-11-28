@@ -7,7 +7,7 @@ import (
 	"runtime"
 )
 
-func BlameFunc(f interface{}) string {
+func blameFunc(f interface{}) string {
 	return runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
 }
 
@@ -31,13 +31,14 @@ func ThrowX(err error, desc string) {
 	quit(s)
 }
 
-func ThrowSys(err error) {
-	s := fmt.Sprintf("%s %s", redError(), err)
-	quit(s)
-}
+// func ThrowSys(err error) {
+// 	s := fmt.Sprintf("%s %s", redError(), err)
+// 	quit(s)
+// }
 
-func ThrowSysDescriptor(triggerFunc string, err error) {
-	tf := MakeT(triggerFunc).Blue().Str()
+func ThrowSys(funcCulprit interface{}, err error) {
+	bf := blameFunc(funcCulprit)
+	tf := MakeT(bf).Blue().Str()
 	s := fmt.Sprintf("%s %s has caused -> %s", redError(), tf, err)
 	quit(s)
 }

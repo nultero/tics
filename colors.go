@@ -2,9 +2,16 @@ package tics
 
 import "fmt"
 
+// 33 is yellow / gold on default terminal?
+
 // Returns blued ASCII
 func Blue(s string) string {
-	return fmt.Sprintf("\x1b[32;1;1m%v\x1b[0m", s)
+	return fmt.Sprintf("\x1b[34;1m%v\x1b[0m", s)
+}
+
+// Returns green ASCII
+func Green(s string) string {
+	return fmt.Sprintf("\x1b[32;1m%v\x1b[0m", s)
 }
 
 // Returns bolded ASCII
@@ -15,6 +22,11 @@ func Bold(s string) string {
 // Returns dark-blued ASCII
 func DarkBlue(s string) string {
 	return fmt.Sprintf("\x1b[34;1;4m%v\x1b[0m", s)
+}
+
+// Returns pink ASCII str
+func Magenta(s string) string {
+	return fmt.Sprintf("\x1b[35;1m%v\x1b[0m", s)
 }
 
 // Returns pink ASCII str

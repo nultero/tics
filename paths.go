@@ -34,7 +34,7 @@ func ReplaceHomeDir(s string, crashOnErr bool) string {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		if crashOnErr {
-			ThrowSys(err)
+			ThrowSys(ReplaceHomeDir, err)
 		} else {
 			ThrowUnhandled(err)
 		}

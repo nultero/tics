@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/manifoldco/promptui"
 )
 
 func GetInput() string {
@@ -20,4 +22,20 @@ func IsValidInput(a string) bool {
 
 func PrintInvalid(inp string) {
 	fmt.Printf("\ninvalid input '%v' \n", inp)
+}
+
+// Literally just a wrapper around promptui, but reflects on errs,
+// and is reusable for my libs.
+func SelectBetween(explanation string, args []string) string {
+	prompt := promptui.Select{
+		Label: explanation,
+		Items: args,
+	}
+
+	_, result, err := prompt.Run()
+	if err != nil {
+		ThrowSys(SelectBetween, err)
+	}
+
+	return result
 }

@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 )
 
-const perm = 0755
+const Perm = 0755
 
 // Runs the interactive prompts that create the default
 // config and data dirs where this given CLI lives.
@@ -71,7 +71,7 @@ func makeConfigPrompt(path, toolName, defaults string) {
 	}
 
 	if inp == "y" {
-		err := os.WriteFile(path, []byte(defaults), perm)
+		err := os.WriteFile(path, []byte(defaults), Perm)
 		if err != nil {
 
 			// tried to create file, parent dir did not exist
@@ -80,7 +80,7 @@ func makeConfigPrompt(path, toolName, defaults string) {
 				makeDirPrompt(dirPath, toolName)
 
 				// retry file write
-				err = os.WriteFile(path, []byte(defaults), perm)
+				err = os.WriteFile(path, []byte(defaults), Perm)
 
 				if err != nil { // just dump if another error
 					ThrowSys(makeConfigPrompt, err)
@@ -110,7 +110,7 @@ func makeDirPrompt(dirPath, toolName string) {
 	}
 
 	if inp == "y" {
-		err := os.Mkdir(dirPath, perm)
+		err := os.Mkdir(dirPath, Perm)
 		if err != nil {
 			ThrowSys(makeDirPrompt, err)
 		}

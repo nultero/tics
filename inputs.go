@@ -9,6 +9,18 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
+// Wrapper around GetInput -- takes a string, gets input, and returns whether true.
+func Confirmed(prompt string) bool {
+	fmt.Printf("%v", prompt)
+	i := GetInput()
+	i = strings.ToLower(i)
+	if strings.Contains(i, "y") {
+		return true
+	} else {
+		return false
+	}
+}
+
 func GetInput() string {
 	r := bufio.NewReader(os.Stdin)
 	s, _ := r.ReadString('\n')

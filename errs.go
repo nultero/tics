@@ -31,14 +31,10 @@ func ThrowX(err error, desc string) {
 	quit(s)
 }
 
-// func ThrowSys(err error) {
-// 	s := fmt.Sprintf("%s %s", redError(), err)
-// 	quit(s)
-// }
-
+// An unrecoverable error with a descriptive package pointer to what went wrong.
 func ThrowSys(funcCulprit interface{}, err error) {
 	bf := blameFunc(funcCulprit)
-	tf := MakeT(bf).Blue().Str()
+	tf := Make(bf).Blue().String()
 	s := fmt.Sprintf("%s %s has caused -> %s", redError(), tf, err)
 	quit(s)
 }

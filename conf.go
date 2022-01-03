@@ -60,7 +60,8 @@ func coalesceDefaults(sl []string) string {
 // Gets confirmation to create config, and attempts to write conf file.
 // Stops executing and throws error outright on failure to write.
 func makeConfigPrompt(path, toolName, defaults string) {
-	fmt.Printf("> config file `%v` not found\n", Bold(path))
+	p := Make(path).Bold().String()
+	fmt.Printf("> config file `%v` not found\n", p)
 	PrintPrompt("config", toolName)
 
 	inp := GetInput()
@@ -122,12 +123,14 @@ func makeDirPrompt(dirPath, toolName string) {
 }
 
 func PrintPrompt(kind, toolName string) {
-	fmt.Printf("create this %v with %v defaults? [ y / N ] >", kind, Blue(toolName))
+	tn := Make(toolName).Blue().String()
+	fmt.Printf("create this %v with %v defaults? [ y / N ] >", kind, tn)
 }
 
 func outro(toolName string) {
-	f := MakeT("all setup for").Blue().Str()
-	n := Pink(toolName)
-	l := MakeT("has been completed").Blue().Str()
-	fmt.Println(f, n, l)
+	begin := Make("all setup for").Blue().String()
+	name := Make(toolName).Pink().String()
+	last := Make("has been completed").Blue().String()
+
+	fmt.Println(begin, name, last)
 }

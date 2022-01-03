@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 )
 
+// Quick reusable json boiler, intended to be used on byte slices.
 func ToJson(i interface{}) map[string]interface{} {
 
 	var j map[string]interface{}

@@ -62,6 +62,12 @@ func (s *str) Bold() *str {
 	return s
 }
 
+// Transforms *s into a dark blue ASCII.
+func (s *str) DarkBlue() *str {
+	s.content = fmt.Sprintf(lookup("darkblue"), s.content)
+	return s
+}
+
 // Transforms *s into a green ASCII.
 func (s *str) Green() *str {
 	s.content = fmt.Sprintf(lookup("green"), s.content)
